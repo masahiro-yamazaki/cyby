@@ -5,7 +5,8 @@ module Cyby
     include HTTParty
 
     def initialize
-      config = YAML.load_file("#{ENV['HOME']}/.cyby.yml")
+      # TODO: Railsアプリケーションのルートディレクトリ直下の.cyby.ymlを読み込めるように変更
+      config = YAML.load_file("#{ENV['AYUWARA_ROOT']}/.cyby.yml")
       self.class.base_uri "https://#{config['subdomain']}.cybozu.com/v1/csv"
       @auth = Base64.encode64("#{config['login']}:#{config['password']}").chomp
     end
